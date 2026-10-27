@@ -52,6 +52,8 @@ async function submitProof(event){
   submitBtn.disabled = true; submitBtn.textContent = 'Submitting...';
   const data = new FormData();
   data.append('youtubeChannel', channel);
+  data.append('paymentPhone', document.getElementById('paymentPhone').value);
+data.append('paymentUtr', document.getElementById('paymentUtr').value);
   data.append('paymentScreenshot', screenshot);
   data.append('packageName', document.getElementById('paymentPackage').textContent);
   data.append('amount', document.getElementById('paymentAmount').textContent.replace('₹',''));
@@ -68,6 +70,12 @@ async function submitProof(event){
 
 </script>
 
+<label for="paymentPhone">Payment Phone Number</label>
+<input class="field" type="tel" id="paymentPhone" name="paymentPhone" placeholder="Enter phone number" required>
+
+<label for="paymentUtr">Paytm UTR / Transaction ID</label>
+<input class="field" type="text" id="paymentUtr" name="paymentUtr" placeholder="Enter transaction ID" required>
+  
 <div id="paymentModal" class="modal-back hidden" role="dialog" aria-modal="true" aria-labelledby="paymentTitle">
   <div class="modal">
     <div class="modal-head"><h2 id="paymentTitle">Complete Payment</h2><button class="close" type="button" onclick="closePayment()">Close ✕</button></div>
@@ -78,7 +86,12 @@ async function submitProof(event){
     <form id="paymentProofForm" class="proof-form" onsubmit="submitProof(event)">
       <label for="youtubeChannel">YouTube channel link</label>
       <input id="youtubeChannel" name="youtubeChannel" type="url" placeholder="https://youtube.com/@yourchannel" required>
-      <label for="paymentScreenshot">Payment screenshot</label>
+     <label for="paymentPhone">Payment Phone Number</label>
+<input id="paymentPhone" name="paymentPhone" type="tel" required>
+
+<label for="paymentUtr">Paytm UTR / Transaction ID</label>
+<input id="paymentUtr" name="paymentUtr" type="text" required>
+     <label for="paymentScreenshot">Payment screenshot</label>
       <input id="paymentScreenshot" name="paymentScreenshot" type="file" accept="image/*" required>
       <button class="buy" type="submit">Submit Payment Proof ➤</button>
       <p id="proofMessage" class="muted" aria-live="polite"></p><p class="muted">Your request will be reviewed by the admin after submission.</p>
