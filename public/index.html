@@ -41,7 +41,20 @@ h1{font-size:clamp(36px,5vw,56px);line-height:1.02;letter-spacing:-1.8px;margin:
 <script>
 let selected={name:'',price:0};
 function choose(name,price){selected={name,price};document.getElementById('pack').value=name+'|'+price;document.getElementById('request').scrollIntoView({behavior:'smooth'});document.getElementById('channel').focus()}
+function openPayment(name, price) {
+  document.getElementById('paymentPackage').textContent = name;
+  document.getElementById('paymentAmount').textContent = '₹' + price;
+  document.getElementById('amountWords').textContent =
+    price === 10 ? 'Ten Rupees Only' :
+    price === 99 ? 'Ninety Nine Rupees Only' :
+    'Nine Hundred Ninety Nine Rupees Only';
 
+  document.getElementById('paymentModal').classList.remove('hidden');
+}
+
+function closePayment() {
+  document.getElementById('paymentModal').classList.add('hidden');
+  }
 async function submitProof(event){
   event.preventDefault();
   const form = document.getElementById('paymentProofForm');
