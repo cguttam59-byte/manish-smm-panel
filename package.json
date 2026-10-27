@@ -1,0 +1,14 @@
+{
+  "name": "manish-smm-panel",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Manish SMM Panel with payment-proof submissions and admin review",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "multer": "^2.0.2"
+  }
+}
