@@ -33,6 +33,8 @@ const upload = multer({storage, limits:{fileSize:5*1024*1024}, fileFilter:(_req,
 function auth(req,res,next){const t=(req.headers.authorization||'').replace(/^Bearer /,'');if(!tokens.has(t))return res.status(401).json({error:'Please log in again.'});next();}
 app.post('/api/orders', upload.single('paymentScreenshot'), (req,res)=>{
  const youtubeChannel=String(req.body.youtubeChannel||'').trim();
+  const paymentPhone=String(req.body.paymentPhone||'').trim();
+const paymentUtr=String(req.body.paymentUtr||'').trim();
  const packageName=String(req.body.packageName||'').trim();
  const amount=Number(req.body.amount);
  let u; try{u=new URL(youtubeChannel)}catch{return res.status(400).json({error:'Enter a valid YouTube channel URL.'})}
@@ -40,7 +42,7 @@ app.post('/api/orders', upload.single('paymentScreenshot'), (req,res)=>{
  if(!req.file)return res.status(400).json({error:'Payment screenshot is required.'});
  if(!packageName || ![10,99,999].includes(amount)) {fs.unlink(req.file.path,()=>{});return res.status(400).json({error:'Invalid package or amount.'});}
  const orders=readOrders();
- const order={id:crypto.randomUUID(),youtubeChannel,packageName,amount,status:'pending',createdAt:new Date().toISOString(),screenshotFile:req.file.filename};
+ const order={id:crypto.randomUUID(),youtubeChannel,paymentPhone,paymentUtr,packageName,amount,status:'pending',createdAt:new Date().toISOString(),screenshotFile:req.file.filename};
  orders.unshift(order);writeOrders(orders);
  res.status(201).json({ok:true,id:order.id});
 });
