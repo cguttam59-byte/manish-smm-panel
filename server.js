@@ -41,7 +41,7 @@ const paymentUtr=String(req.body.paymentUtr||'').trim();
  if(!['youtube.com','www.youtube.com','m.youtube.com','youtu.be','www.youtu.be'].includes(u.hostname.toLowerCase())) return res.status(400).json({error:'Please submit a YouTube channel link.'});
  if(!req.file)return res.status(400).json({error:'Payment screenshot is required.'});
  if(!packageName || ![10,99,999].includes(amount)) {fs.unlink(req.file.path,()=>{});return res.status(400).json({error:'Invalid package or amount.'});}
- const orders=readOrders();
+
  const order={id:crypto.randomUUID(),youtubeChannel,paymentPhone,paymentUtr,packageName,amount,status:'pending',createdAt:new Date().toISOString(),screenshotFile:req.file.filename};
  orders.unshift(order);writeOrders(orders);
  res.status(201).json({ok:true,id:order.id});
