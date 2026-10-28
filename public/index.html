@@ -127,7 +127,7 @@ async function submitProof(event){
   data.append('packageName', document.getElementById('paymentPackage').textContent);
   data.append('amount', document.getElementById('paymentAmount').textContent.replace('₹',''));
   try {
-    const res = await fetch('/api/orders', {method:'POST', body:data});
+    const res = await fetch('https://manish-smm-panel-2026.onrender.com/api/orders', {method:'POST', body:data});
     const result = await res.json();
     if(!res.ok) throw new Error(result.error || 'Submission failed');
     document.getElementById('proofMessage').textContent = 'Request submitted! Your payment proof is waiting for admin review.';
