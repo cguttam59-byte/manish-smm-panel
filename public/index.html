@@ -74,6 +74,22 @@ h1{font-size:clamp(36px,5vw,56px);line-height:1.02;letter-spacing:-1.8px;margin:
 }
 
 .payment-qr {
+  <form id="paymentProofForm" class="proof-form" onsubmit="submitProof(event)">
+  <label>YouTube Channel Link</label>
+  <input id="youtubeChannel" type="url" required>
+
+  <label>Payment Phone Number</label>
+  <input id="paymentPhone" type="tel" required>
+
+  <label>UTR / Transaction ID</label>
+  <input id="paymentUtr" type="text" required>
+
+  <label>Payment Screenshot</label>
+  <input id="paymentScreenshot" type="file" accept="image/*" required>
+
+  <button class="buy" type="submit">Submit Payment Proof</button>
+  <p id="proofMessage"></p>
+</form>
   display: block;
   width: 100%;
   max-width: 280px;
